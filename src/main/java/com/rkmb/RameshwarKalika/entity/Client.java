@@ -24,7 +24,7 @@ public class Client {
 	String clientJobDetails;
 	@Column(name = "client MonthlyIncome")
 	Long clientIncome;
-	@Column(name = "client id")
+	@Column(name = "client caste")
 	String clientCaste;
 	public Integer getClientId() {
 		return clientId;
