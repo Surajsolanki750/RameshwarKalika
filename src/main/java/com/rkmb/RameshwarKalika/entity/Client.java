@@ -15,17 +15,17 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "client id")
-	Integer clientId;
+	private Integer clientId;
 	@Column(name = "client name")
-	String clientFullName;
+	private String clientFullName;
 	@Column(name = "client DoB")
-	Date clientDOB;
+	private Date clientDOB;
 	@Column(name = "client JobDetails")
-	String clientJobDetails;
+	private String clientJobDetails;
 	@Column(name = "client MonthlyIncome")
-	Long clientIncome;
+	private Long clientIncome;
 	@Column(name = "client caste")
-	String clientCaste;
+	private String clientCaste;
 	public Integer getClientId() {
 		return clientId;
 	}
