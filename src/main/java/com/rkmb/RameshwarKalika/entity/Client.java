@@ -10,21 +10,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "client data")
+@Table(name = "client_data")
 public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "client id")
+	@Column(name = "client_id")
 	private Integer clientId;
-	@Column(name = "client name")
+	@Column(name = "client_name")
 	private String clientFullName;
 	@Column(name = "client DoB")
 	private Date clientDOB;
-	@Column(name = "client JobDetails")
+	@Column(name = "client_JobDetails")
 	private String clientJobDetails;
-	@Column(name = "client MonthlyIncome")
+	@Column(name = "client_MonthlyIncome")
 	private Long clientIncome;
-	@Column(name = "client caste")
+	@Column(name = "client_caste")
 	private String clientCaste;
 	public Integer getClientId() {
 		return clientId;
