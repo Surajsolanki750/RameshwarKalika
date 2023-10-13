@@ -18,7 +18,7 @@ public class Client {
 	private Integer clientId;
 	@Column(name = "client_name")
 	private String clientFullName;
-	@Column(name = "client DoB")
+	@Column(name = "client_DoB")
 	private Date clientDOB;
 	@Column(name = "client_JobDetails")
 	private String clientJobDetails;
