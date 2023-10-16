@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,13 +31,13 @@ public class ClientController {
 		return service.getClientList();
 	}
 
-	@PutMapping("/save")
+	@PostMapping("/save")
 	public String saveClient(@RequestBody Client client) {
 		service.saveClient(client);
 		return "Client data stored in the database";
 	}
 
-	@PutMapping("/saveAll")
+	@PostMapping("/saveAll")
 	public String saveAllClients(@RequestBody List<Client> list) {
 		service.saveAll(list);
 		return "All the Data Stored Successfully";
