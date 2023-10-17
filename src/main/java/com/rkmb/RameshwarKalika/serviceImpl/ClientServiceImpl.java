@@ -49,7 +49,7 @@ public class ClientServiceImpl implements ClientService {
 
 	// Update
 	@Override
-	public void updateStudentDetails(Integer id, Client client) {
+	public void updateClientDetails(Integer id, Client client) {
 		Client update = repository.findById(id).get();
 		update.setClientFullName(client.getClientFullName());
 		update.setClientDOB(client.getClientDOB());

@@ -11,7 +11,7 @@ public interface ClientService {
 	public List<Client> getClientList();
 	public void saveClient(Client client);
 	public void saveAll(List<Client> clientList);
-	public void updateStudentDetails(Integer id, Client client);
+	public void updateClientDetails(Integer id, Client client);
 	public void deleteClientById(Integer id);
 	public void deleteAllClients();
 }
