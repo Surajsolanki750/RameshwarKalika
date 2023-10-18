@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rkmb.RameshwarKalika.entity.Client;
@@ -59,13 +58,19 @@ public class ClientController {
 	}
 
 	@DeleteMapping("delete/{id}")
-	public String deleteClientData(@RequestParam Integer id) {
+	public String deleteClientData(@PathVariable Integer id) {
 		if(id!=null) {
 			service.deleteClientById(id);
 			return "data deleted";
 		}else {
 			return "There is no data for given id = " +id+" in the database";
 		}
+	}
+	
+	@DeleteMapping("/deleteAll")
+	public String deleteAllData() {
+		service.deleteAllClients();
+		return "all data deleted";
 	}
 
 }
