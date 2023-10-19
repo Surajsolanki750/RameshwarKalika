@@ -32,10 +32,9 @@ public interface ClientService2 {
 	public String editSalary(Integer id, Long salary);
 	
 	//Delete DELETEMAPPING
-	
-	
-	
+	public String deleteClient(Integer id);
 	
 	//Delete All DELETEMAPPING
-
+	public String deleteAll();
+	
 }
