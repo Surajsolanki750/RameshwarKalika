@@ -12,8 +12,10 @@ public interface ClientRepository2 extends JpaRepository<Client2, Integer>{
 	
 	public List<Client2> findByName(String name);
 	
-	public List<Client2> findBySalary();
+	public List<Client2> findBySalary(Long salary);
 	
-	public List<Client2> findByCaste();
+	public List<Client2> findByCaste(String caste);
+	
+	public List<Client2> findByAge(Integer age);
 
 }

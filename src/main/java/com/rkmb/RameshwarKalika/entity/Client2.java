@@ -58,11 +58,11 @@ public class Client2 {
 		this.clientJobDetails = clientJobDetails;
 	}
 
-	public Long getClientIncome() {
+	public Long getClientSalary() {
 		return clientSalary;
 	}
 
-	public void setClientIncome(Long clientSalary) {
+	public void setClientSalary(Long clientSalary) {
 		this.clientSalary = clientSalary;
 	}
 
