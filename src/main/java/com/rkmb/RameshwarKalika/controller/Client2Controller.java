@@ -89,9 +89,13 @@ public class Client2Controller {
 	}
 	
 	@PatchMapping("/editSalary/{id}")
-	public String editSalary(@PathVariable Integer id, @RequestParam Long salary) {
-		service.editSalary(id, salary);
-		return "edited the salary of id "+id;
+	public ResponseEntity<String> editSalary(@PathVariable Integer id, @RequestParam Long salary) {
+		if(id!=null) {
+			service.editSalary(id, salary);
+			return ResponseEntity.status(HttpStatus.OK).body("Salary of client with id = "+id+" is updated to "+salary);
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("There is no client with id = "+id);
+		}
 	}
 	
 	//Delete data--------------------------------------------------------------------------------------------------------------------//
