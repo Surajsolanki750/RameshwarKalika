@@ -3,20 +3,18 @@ package com.rkmb.RameshwarKalika.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.rkmb.RameshwarKalika.Exception.ResourceNotFoundExcpetion;
 import com.rkmb.RameshwarKalika.entity.Client2;
 import com.rkmb.RameshwarKalika.repository.ClientRepository2;
 import com.rkmb.RameshwarKalika.service.ClientService2;
 
+@Service
 public class ClientServiceImpl2 implements ClientService2 {
 
-	private ClientRepository2 repository;
-
 	@Autowired
-	public ClientServiceImpl2(ClientRepository2 repository) {
-		this.repository = repository;
-	}
+	private ClientRepository2 repository;
 
 	@Override
 	public Client2 findById(Integer id) {
@@ -47,6 +45,11 @@ public class ClientServiceImpl2 implements ClientService2 {
 		List<Client2> list = repository.findByAge(age);
 		return list;
 	}
+	
+	@Override
+	public List<Client2> getAll() {
+		return repository.findAll();
+	}
 
 	@Override
 	public String saveClient(Client2 client) {
@@ -74,10 +77,11 @@ public class ClientServiceImpl2 implements ClientService2 {
 	}
 
 	@Override
-	public String editname(Integer id, String name) {
+	public String editName(Integer id, String name) {
 		Client2 editName = repository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundExcpetion("Client with id \" + id + \" not exist in the database"));
 		editName.setClientFullName(name);
+		repository.save(editName);
 		return "Name edited for id " + id;
 	}
 
@@ -86,6 +90,7 @@ public class ClientServiceImpl2 implements ClientService2 {
 		Client2 editAge = repository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundExcpetion("Client with id \" + id + \" not exist in the database"));
 		editAge.setclientAge(age);
+		repository.save(editAge);
 		return "Age edited for id " + id;
 	}
 
@@ -94,6 +99,7 @@ public class ClientServiceImpl2 implements ClientService2 {
 		Client2 editSalary = repository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundExcpetion("Client with id \" + id + \" not exist in the database"));
 		editSalary.setClientSalary(salary);
+		repository.save(editSalary);
 		return "Salary edited for id " + id;
 	}
 
@@ -112,5 +118,7 @@ public class ClientServiceImpl2 implements ClientService2 {
 		repository.deleteAll();
 		return "All data deleted.... :-(";
 	}
+
+
 
 }

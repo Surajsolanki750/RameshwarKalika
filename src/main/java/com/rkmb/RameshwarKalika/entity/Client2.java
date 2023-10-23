@@ -88,4 +88,11 @@ public class Client2 {
 
 	}
 
+	@Override
+	public String toString() {
+		return "clientFullName : " + clientFullName;
+	}
+	
+	
+
 }

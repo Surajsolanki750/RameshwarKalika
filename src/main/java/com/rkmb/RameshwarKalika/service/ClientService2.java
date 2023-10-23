@@ -18,6 +18,8 @@ public interface ClientService2 {
 	
 	public List<Client2> findByAge(Integer age);
 	
+	public List<Client2> getAll();
+	
 	//save  POSTMAPPING
 	public String saveClient(Client2 client);
 	
@@ -27,7 +29,7 @@ public interface ClientService2 {
 	public String updateClient(Integer id, Client2 client);
 	
 	//Partial Update  PATCHMAPPING
-	public String editname(Integer id, String name);
+	public String editName(Integer id, String name);
 	public String editAge(Integer id, Integer age);
 	public String editSalary(Integer id, Long salary);
 	
