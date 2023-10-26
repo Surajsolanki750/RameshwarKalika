@@ -34,9 +34,16 @@ public class Client2Controller {
 	
 	//Retrieve data----------------------------------------------------------------------------------------------------------//
 	@GetMapping("/getById/{id}")
-	public Client2 getById(@PathVariable Integer id) {
+	public ResponseEntity<Client2> getById(@PathVariable Integer id) {
 		LOG.info("getById method is called");
-		return service.findById(id);
+		Client2 client2 = service.findById(id);
+		if(client2!=null) {
+			LOG.info("getById method is executed");
+			return ResponseEntity.ok(client2);
+		}else {
+			LOG.info("client with this id = "+id+" not found");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	@GetMapping("/getByName")
