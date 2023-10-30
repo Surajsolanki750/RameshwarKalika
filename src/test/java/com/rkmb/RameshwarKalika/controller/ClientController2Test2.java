@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 
 import java.util.List;
 
@@ -24,28 +25,32 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.rkmb.RameshwarKalika.entity.Client2;
 import com.rkmb.RameshwarKalika.repository.ClientRepository2;
 
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.http.ContentType;
+import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.RequestSpecification;
+
 @RunWith(SpringRunner.class)
 @TestPropertySource("classpath:/application-junit.properties")
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ClientController2Test {
+public class ClientController2Test2 {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ClientController2Test.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ClientController2Test2.class);
 
 	@Autowired
 	private ClientRepository2 repository;
 
-	@Autowired
-	private Client2Controller controller;
+	private RequestSpecification requestSpecification;
 
-//	private resquestSpecification requestSpecification;
-//
-//	@LocalServerPort
-//	private int port;
-//
-//	public void initRequestSpecification() {
-//		final RequestSpecBuilder tempSpec = new RequestSpecBuilder();
-//		requestSpecification.SetBaseUri("http://localhost:"+port+"/client").setContentType(ContentType.JSON).build();
-//	}
+	@LocalServerPort
+	private int port;
+
+	public void initRequestSpecification() {
+		final RequestSpecBuilder tempSpec = new RequestSpecBuilder();
+		requestSpecification = tempSpec.setBaseUri("http://localhost:" + port + "/client")
+				.setContentType(ContentType.JSON).build();
+	}
 
 	@Before
 	public void init() {
@@ -54,24 +59,7 @@ public class ClientController2Test {
 	}
 
 	@Test
-	public void testGetById() {
-		// Given
-		Client2 client = new Client2();
-		client.setClientFullName("Suraj");
-		client.setclientAge(26);
-		client.setClientCaste("OBC");
-		client.setClientJobDetails("IT ENGINEER");
-		client.setClientSalary(56000l);
-		Client2 repoClient = repository.save(client);
-
-		// When
-		ResponseEntity<Client2> entity = controller.getById(repoClient.getClientId());
-		// Then
-		assertEquals(HttpStatus.OK, entity.getStatusCode());
-	}
-
-	@Test
-	public void testGetByName() {
+	public void TestGetClientById() {
 		// Given
 		Client2 client = new Client2();
 		client.setClientFullName("Suraj");
@@ -81,27 +69,20 @@ public class ClientController2Test {
 		client.setClientSalary(56000l);
 		Client2 repoClient = repository.save(client);
 		// When
-		List<Client2> list = controller.getByName("Suraj");
+		final ValidatableResponse restResponse = RestAssured.given(requestSpecification).basePath("/getById/{id}")
+				.pathParam("id", repoClient.getClientId()).when().get().then();
 		// Then
-		assertFalse(list.isEmpty());
-		assertEquals(repoClient.getClientFullName(), "Suraj");
-
+		assertEquals(HttpStatus.OK.value(), restResponse.extract().statusCode());
 	}
 
 	@Test
-	public void testGetByNameExpectError() {
-		//Given
-		Client2 client = new Client2();
-		client.setClientFullName("Suraj");
-		client.setclientAge(26);
-		client.setClientCaste("OBC");
-		client.setClientJobDetails("IT ENGINEER");
-		client.setClientSalary(56000l);
-		Client2 repoClient = repository.save(client);
-		//When
-		List<Client2> list = controller.getByName("Ganesh");
-		//Then
-		assertTrue(list.isEmpty());
-		
+	public void TestGetClientByIdExpectError() {
+		// Given
+
+		// When
+		final ValidatableResponse restResponse = RestAssured.given(requestSpecification).basePath("/getById/{id}")
+				.pathParam("id", 12).when().get().then();
+		// Then
+		assertEquals(HttpStatus.NOT_FOUND, restResponse.extract().statusCode());
 	}
 }
