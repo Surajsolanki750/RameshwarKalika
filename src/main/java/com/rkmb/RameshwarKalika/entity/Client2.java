@@ -74,9 +74,8 @@ public class Client2 {
 		this.clientCaste = clientCaste;
 	}
 
-	public Client2(Integer clientId, String clientFullName, Integer clientAge, String clientJobDetails, Long clientSalary,
+	public Client2(String clientFullName, Integer clientAge, String clientJobDetails, Long clientSalary,
 			String clientCaste) {
-		this.clientId = clientId;
 		this.clientFullName = clientFullName;
 		this.clientAge = clientAge;
 		this.clientJobDetails = clientJobDetails;

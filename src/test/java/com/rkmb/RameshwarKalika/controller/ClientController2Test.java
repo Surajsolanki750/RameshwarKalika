@@ -1,6 +1,5 @@
 package com.rkmb.RameshwarKalika.controller;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
@@ -97,7 +95,7 @@ public class ClientController2Test {
 		client.setClientCaste("OBC");
 		client.setClientJobDetails("IT ENGINEER");
 		client.setClientSalary(56000l);
-		Client2 repoClient = repository.save(client);
+		repository.save(client);
 		//When
 		List<Client2> list = controller.getByName("Ganesh");
 		//Then
